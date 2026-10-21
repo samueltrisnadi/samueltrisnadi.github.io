@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<!-- Compiled Tailwind CSS for production -->
+<link href="output.css" rel="stylesheet">
 <style>
 :root{--bg:#0a0a0a;--panel:rgba(9,16,34,.92);--blue:#1a56db;--blue-hi:#3b7bff;--navy:#0b1f4d;--green:#1fdc7a;--line:#16254a;--txt:#f5f7fa;--mut:#8b95a7}
 html{scroll-behavior:auto;scroll-padding-top:64px}
@@ -353,13 +354,6 @@ body.lock{overflow:hidden}
 </dialog>
 
 <script>
-/* Suppress Tailwind CDN production warning in console */
-const _w = console.warn;
-console.warn = (...args) => {
-  if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
-  _w(...args);
-};
-
 function badProfile(img){
   if(img.src.includes('photos/profile.webp')){
     img.src = 'profile.webp';

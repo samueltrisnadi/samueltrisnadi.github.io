@@ -1,0 +1,16 @@
+{
+  "name": "samueltrisnadi.github.io-main",
+  "version": "1.0.0",
+  "description": "Live site hosted via GitHub Pages: https://samueltrisnadi.github.io",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
