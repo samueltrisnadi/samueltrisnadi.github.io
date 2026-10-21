@@ -48,7 +48,7 @@ ul.log li{position:relative;padding-left:1.2rem;margin:.35rem 0;color:#c4cad6;fo
 ul.log li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;background:var(--green)}
 .rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:min(340px,82vw);gap:1.25rem;overflow-x:auto;padding:1rem .25rem 1.5rem;cursor:grab;overscroll-behavior-x:contain}
 .rail.one{grid-template-rows:auto}
-.rail.drag{cursor:grabbing;user-select:none}
+.rail[data-drag]{cursor:grabbing;user-select:none}
 .rail::-webkit-scrollbar{height:12px}
 .rail::-webkit-scrollbar-track{background:#0d1424;border:1px solid var(--line);border-radius:6px}
 .rail::-webkit-scrollbar-thumb{background:var(--blue);border-radius:6px}
@@ -57,8 +57,12 @@ ul.log li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:
 .card{min-width:0;cursor:pointer}
 .ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--navy),#060b18);border-bottom:1px solid var(--line);overflow:hidden}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
-.card{transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-.card:hover,.card:focus-visible{transform:translateY(-8px);border-color:var(--blue-hi);box-shadow:0 16px 32px rgba(59,123,255,.28)}
+.card{transition:transform .25s ease,border-color .25s ease}
+.card[data-h],.card:focus-visible,.xp:hover{transform:translateY(-8px);border-color:var(--blue-hi)}
+.rail .card::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:0 16px 32px rgba(59,123,255,.28);opacity:0;transition:opacity .25s ease}
+.rail .card[data-h]::after,.rail .card:focus-visible::after{opacity:1}
+.xp{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.xp:hover,.xp:focus-visible{box-shadow:0 16px 32px rgba(59,123,255,.28)}
 dialog{background:transparent;border:0;padding:0;margin:auto;width:min(880px,94vw);max-height:92vh;color:var(--txt)}
 dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(3px)}
 .pm-in{background:#0a1226;padding:1.5rem;max-height:92vh;overflow-y:auto}
@@ -72,7 +76,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(3px)}
 body.lock{overflow:hidden}
 .lnk{color:var(--green);text-decoration:underline;text-underline-offset:3px}
 .lnk:hover{color:#fff}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}.card{transition:none}.card:hover,.card:focus-visible{transform:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}.card{transition:none}.card[data-h],.card:hover,.card:focus-visible{transform:none}}
 </style>
 </head>
 <body>
@@ -388,29 +392,45 @@ function bad(img){
   addEventListener('resize',size);
   addEventListener('pointermove',e=>{m.x=e.clientX;m.y=e.clientY});
   addEventListener('pointerleave',()=>{m.x=m.y=-9999});
-  function frame(){
-    g.clearRect(0,0,W,H);
+  const dlg=document.getElementById('pm'),B=8,bk=Array.from({length:B},()=>[]);let last=0;
+  function frame(t){
+    requestAnimationFrame(frame);
+    const dt=t-last;if(dt<33||dlg.open)return;
+    last=t;const k=Math.min(dt,100)/16.7;
     for(const p of P){
-      const dx=p.x-m.x,dy=p.y-m.y,d=Math.hypot(dx,dy);
-      if(d<150&&d>0){const f=(150-d)/150;p.vx+=dx/d*f*.12;p.vy+=dy/d*f*.12}
-      p.vx+=(p.bx-p.vx)*.04;p.vy+=(p.by-p.vy)*.04;
-      if(!still){p.x+=p.vx/3;p.y+=p.vy/3}
+      const dx=p.x-m.x,dy=p.y-m.y,d2=dx*dx+dy*dy;
+      if(d2<22500&&d2>0){const d=Math.sqrt(d2),f=(150-d)/150;p.vx+=dx/d*f*.12*k;p.vy+=dy/d*f*.12*k}
+      p.vx+=(p.bx-p.vx)*.04*k;p.vy+=(p.by-p.vy)*.04*k;
+      if(!still){p.x+=p.vx/3*k;p.y+=p.vy/3*k}
       if(p.x<-10)p.x=W+10;else if(p.x>W+10)p.x=-10;
       if(p.y<-10)p.y=H+10;else if(p.y>H+10)p.y=-10;
     }
+    g.clearRect(0,0,W,H);
+    for(const q of bk)q.length=0;
     for(let i=0;i<P.length;i++){
       const a=P[i];
       for(let j=i+1;j<P.length;j++){
-        const b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);
-        if(d<130){g.strokeStyle=`rgba(59,123,255,${(1-d/130)*.35})`;g.lineWidth=.8;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke()}
+        const b=P[j],dx=a.x-b.x,dy=a.y-b.y,d2=dx*dx+dy*dy;
+        if(d2<16900)bk[Math.min(B-1,((1-Math.sqrt(d2)/130)*B)|0)].push(a.x,a.y,b.x,b.y);
       }
-      const dm=Math.hypot(a.x-m.x,a.y-m.y);
-      if(dm<180){g.strokeStyle=`rgba(31,220,122,${(1-dm/180)*.6})`;g.lineWidth=1;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(m.x,m.y);g.stroke()}
-      g.fillStyle='rgba(31,220,122,.75)';g.beginPath();g.arc(a.x,a.y,a.r,0,6.283);g.fill();
     }
-    requestAnimationFrame(frame);
+    g.lineWidth=.8;
+    for(let n=0;n<B;n++){
+      const L=bk[n];if(!L.length)continue;
+      g.strokeStyle=`rgba(59,123,255,${(n+.5)/B*.35})`;g.beginPath();
+      for(let q=0;q<L.length;q+=4){g.moveTo(L[q],L[q+1]);g.lineTo(L[q+2],L[q+3])}
+      g.stroke();
+    }
+    g.lineWidth=1;
+    for(const a of P){
+      const dx=a.x-m.x,dy=a.y-m.y,d2=dx*dx+dy*dy;
+      if(d2<32400){g.strokeStyle=`rgba(31,220,122,${(1-Math.sqrt(d2)/180)*.6})`;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(m.x,m.y);g.stroke()}
+    }
+    g.fillStyle='rgba(31,220,122,.75)';g.beginPath();
+    for(const a of P){g.moveTo(a.x+a.r,a.y);g.arc(a.x,a.y,a.r,0,6.283)}
+    g.fill();
   }
-  size();frame();
+  size();requestAnimationFrame(frame);
 })();
 
 /* Momentum scrolling: page + rails by wheel, rails by mouse drag and arrow keys. Touch uses the device's native momentum. */
@@ -432,6 +452,7 @@ function bad(img){
   },{passive:false});
   const halt=()=>{cancelAnimationFrame(raf);raf=0};
   addEventListener('pointerdown',halt,{passive:true});
+  let st=0;addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(()=>document.querySelectorAll('.rail').forEach(r=>r._probe&&r._probe()),120)},{passive:true});
   addEventListener('keydown',halt,{passive:true});
   document.addEventListener('click',e=>{
     const a=e.target.closest('a[href^="#"]');if(!a)return;
@@ -444,9 +465,16 @@ function bad(img){
   document.querySelectorAll('.rail').forEach(r=>{
     let c=0,t=0,w=0,i=0,down=false,sx=0,sl=0,moved=0,lx=0,lt=0,v=0;
     const max=()=>r.scrollWidth-r.clientWidth;
+    let hx=-1,hy=-1,hc=null,ht=0,idle=0;
+    const setH=c=>{if(c===hc)return;if(hc)delete hc.dataset.h;hc=c;if(c)c.dataset.h=1};
+    const probe=()=>{if(hx<0)return;const el=document.elementFromPoint(hx,hy);setH(el&&r.contains(el)?el.closest('.card'):null)};
+    r._probe=probe;
+    const busy=()=>{const n=performance.now();if(n-ht>120){ht=n;probe()}clearTimeout(idle);idle=setTimeout(probe,150)};
+    r.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;hx=e.clientX;hy=e.clientY;setH(e.target.closest('.card'))});
+    r.addEventListener('pointerleave',()=>{hx=hy=-1;setH(null)});
     const stop=()=>{cancelAnimationFrame(w);cancelAnimationFrame(i);w=i=0};
     let rt=0;
-    function tick(n){c+=(t-c)*ease(n-rt);rt=n;if(Math.abs(t-c)<.5){c=t;w=0}else w=requestAnimationFrame(tick);r.scrollLeft=c}
+    function tick(n){c+=(t-c)*ease(n-rt);rt=n;if(Math.abs(t-c)<.5){c=t;w=0}else w=requestAnimationFrame(tick);busy();r.scrollLeft=c}
     function go(x){t=clamp(x,0,max());if(!w){c=r.scrollLeft;rt=performance.now();w=requestAnimationFrame(tick)}}
 
     r.addEventListener('wheel',e=>{
@@ -458,23 +486,23 @@ function bad(img){
     r.addEventListener('pointerdown',e=>{
       stop();moved=0;
       if(e.pointerType!=='mouse'||e.button!==0)return;
-      down=true;sx=lx=e.clientX;sl=r.scrollLeft;lt=performance.now();v=0;r.classList.add('drag');
+      down=true;sx=lx=e.clientX;sl=r.scrollLeft;lt=performance.now();v=0;r.dataset.drag=1;
     });
     addEventListener('pointermove',e=>{
       if(!down)return;
       const now=performance.now(),dt=now-lt;
-      moved=Math.max(moved,Math.abs(e.clientX-sx));
+      moved=Math.max(moved,Math.abs(e.clientX-sx));if(moved>6)busy();
       r.scrollLeft=sl-(e.clientX-sx);
       if(dt>0){v=.7*v+.3*((lx-e.clientX)/dt);lx=e.clientX;lt=now}
     });
     const end=()=>{
       if(!down)return;
-      down=false;r.classList.remove('drag');
+      down=false;delete r.dataset.drag;
       if(reduce||moved<6||performance.now()-lt>90)return;
       let t0=performance.now();
       const fl=n=>{
         const dt=n-t0,before=r.scrollLeft;t0=n;
-        r.scrollLeft=before+v*dt;v*=Math.pow(.95,dt/16.7);
+        busy();r.scrollLeft=before+v*dt;v*=Math.pow(.95,dt/16.7);
         i=(Math.abs(v)>.03&&r.scrollLeft!==before)?requestAnimationFrame(fl):0;
       };
       i=requestAnimationFrame(fl);
