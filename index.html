@@ -58,9 +58,7 @@ ul.log li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:
 .ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--navy),#060b18);border-bottom:1px solid var(--line);overflow:hidden}
 .ph img{width:100%;height:100%;object-fit:cover;display:block}
 .card{transition:transform .25s ease,border-color .25s ease}
-.card[data-h],.card:focus-visible,.xp:hover{transform:translateY(-8px);border-color:var(--blue-hi)}
-.rail .card::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:0 16px 32px rgba(59,123,255,.28);opacity:0;transition:opacity .25s ease}
-.rail .card[data-h]::after,.rail .card:focus-visible::after{opacity:1}
+.card:hover,.card:focus-visible,.xp:hover{transform:translateY(-8px);border-color:var(--blue-hi)}
 .xp{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
 .xp:hover,.xp:focus-visible{box-shadow:0 16px 32px rgba(59,123,255,.28)}
 dialog{background:transparent;border:0;padding:0;margin:auto;width:min(880px,94vw);max-height:92vh;color:var(--txt)}
@@ -76,7 +74,7 @@ dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(3px)}
 body.lock{overflow:hidden}
 .lnk{color:var(--green);text-decoration:underline;text-underline-offset:3px}
 .lnk:hover{color:#fff}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}.card{transition:none}.card[data-h],.card:hover,.card:focus-visible{transform:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}.card{transition:none}.card:hover,.card:focus-visible{transform:none}}
 </style>
 </head>
 <body>
@@ -355,6 +353,13 @@ body.lock{overflow:hidden}
 </dialog>
 
 <script>
+/* Suppress Tailwind CDN production warning in console */
+const _w = console.warn;
+console.warn = (...args) => {
+  if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+  _w(...args);
+};
+
 function badProfile(img){
   if(img.src.includes('photos/profile.webp')){
     img.src = 'profile.webp';
@@ -453,7 +458,7 @@ function bad(img){
   },{passive:false});
   const halt=()=>{cancelAnimationFrame(raf);raf=0};
   addEventListener('pointerdown',halt,{passive:true});
-  let st=0;addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(()=>document.querySelectorAll('.rail').forEach(r=>r._probe&&r._probe()),120)},{passive:true});
+  let st=0;addEventListener('scroll',()=>{clearTimeout(st);st=setTimeout(()=>{},120)},{passive:true});
   addEventListener('keydown',halt,{passive:true});
   document.addEventListener('click',e=>{
     const a=e.target.closest('a[href^="#"]');if(!a)return;
@@ -466,16 +471,9 @@ function bad(img){
   document.querySelectorAll('.rail').forEach(r=>{
     let c=0,t=0,w=0,i=0,down=false,sx=0,sl=0,moved=0,lx=0,lt=0,v=0;
     const max=()=>r.scrollWidth-r.clientWidth;
-    let hx=-1,hy=-1,hc=null,ht=0,idle=0;
-    const setH=c=>{if(c===hc)return;if(hc)delete hc.dataset.h;hc=c;if(c)c.dataset.h=1};
-    const probe=()=>{if(hx<0)return;const el=document.elementFromPoint(hx,hy);setH(el&&r.contains(el)?el.closest('.card'):null)};
-    r._probe=probe;
-    const busy=()=>{const n=performance.now();if(n-ht>120){ht=n;probe()}clearTimeout(idle);idle=setTimeout(probe,150)};
-    r.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;hx=e.clientX;hy=e.clientY;setH(e.target.closest('.card'))});
-    r.addEventListener('pointerleave',()=>{hx=hy=-1;setH(null)});
     const stop=()=>{cancelAnimationFrame(w);cancelAnimationFrame(i);w=i=0};
     let rt=0;
-    function tick(n){c+=(t-c)*ease(n-rt);rt=n;if(Math.abs(t-c)<.5){c=t;w=0}else w=requestAnimationFrame(tick);busy();r.scrollLeft=c}
+    function tick(n){c+=(t-c)*ease(n-rt);rt=n;if(Math.abs(t-c)<.5){c=t;w=0}else w=requestAnimationFrame(tick);r.scrollLeft=c}
     function go(x){t=clamp(x,0,max());if(!w){c=r.scrollLeft;rt=performance.now();w=requestAnimationFrame(tick)}}
 
     r.addEventListener('wheel',e=>{
@@ -492,7 +490,7 @@ function bad(img){
     addEventListener('pointermove',e=>{
       if(!down)return;
       const now=performance.now(),dt=now-lt;
-      moved=Math.max(moved,Math.abs(e.clientX-sx));if(moved>6)busy();
+      moved=Math.max(moved,Math.abs(e.clientX-sx));
       r.scrollLeft=sl-(e.clientX-sx);
       if(dt>0){v=.7*v+.3*((lx-e.clientX)/dt);lx=e.clientX;lt=now}
     });
@@ -503,7 +501,7 @@ function bad(img){
       let t0=performance.now();
       const fl=n=>{
         const dt=n-t0,before=r.scrollLeft;t0=n;
-        busy();r.scrollLeft=before+v*dt;v*=Math.pow(.95,dt/16.7);
+        r.scrollLeft=before+v*dt;v*=Math.pow(.95,dt/16.7);
         i=(Math.abs(v)>.03&&r.scrollLeft!==before)?requestAnimationFrame(fl):0;
       };
       i=requestAnimationFrame(fl);
