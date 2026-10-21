@@ -530,7 +530,7 @@ async function photos(f){
   try{
     const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${f}`);
     if(!r.ok)return[];
-    return cache[f]=(await r.json()).filter(x=>/\.(webp|jpe?g|png|gif|avif)$/i.test(x.name))
+    return cache[f]=(await r.json()).filter(x=>/\.(webp|jpe?g|png|gif|avif)$/i.test(x.name)&&!/^cover\./i.test(x.name))
       .sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true})).map(x=>`${f}/${encodeURIComponent(x.name)}`);
   }catch(_){return[]}
 }
@@ -555,7 +555,7 @@ async function openProject(c){
   pm.showModal();document.body.classList.add('lock');
   const list=await photos(c.dataset.folder);
   if(t!==tok||!pm.open)return;
-  $('pm-g').innerHTML=list.map((u,i)=>`<a href="${u}" target="_blank" rel="noopener"><img src="${u}" alt="${title} photo ${i+1}" loading="lazy"></a>`).join('');
+  $('pm-g').innerHTML=list.map((u,i)=>`<a href="${u}" target="_blank" rel="noopener"><img src="${u}" alt="${title} photo ${i+1}" loading="lazy" decoding="async"></a>`).join('');
 }
 document.querySelectorAll('.xp').forEach(c=>{c.addEventListener('click',()=>openProject(c));c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openProject(c)}})});
 $('pm-x').onclick=()=>pm.close();
