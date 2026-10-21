@@ -27,7 +27,7 @@ section{padding:4.5rem 0}
 .brk::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
-.nav{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(10,10,10,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(10,10,10,.94);border-bottom:1px solid var(--line)}
 .nav a{color:var(--mut);text-decoration:none;font-size:.75rem;transition:color .2s}
 .nav a:hover{color:var(--green)}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
@@ -383,7 +383,7 @@ function bad(img){
   const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
   let W,H,P=[];
   function size(){
-    const d=Math.min(window.devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;
+    const d=Math.min(1,Math.sqrt(2100000/(innerWidth*innerHeight)));W=innerWidth;H=innerHeight;
     c.width=W*d;c.height=H*d;g.setTransform(d,0,0,d,0,0);
     const n=Math.min(80,Math.floor(W*H/13000));
     P=Array.from({length:n},()=>{const bx=(Math.random()-.5)*.4,by=(Math.random()-.5)*.4;
@@ -392,10 +392,11 @@ function bad(img){
   addEventListener('resize',size);
   addEventListener('pointermove',e=>{m.x=e.clientX;m.y=e.clientY});
   addEventListener('pointerleave',()=>{m.x=m.y=-9999});
-  const dlg=document.getElementById('pm'),B=8,bk=Array.from({length:B},()=>[]);let last=0;
+  const dlg=document.getElementById('pm'),B=8,bk=Array.from({length:B},()=>[]);let last=0,sb=-1e9;
+  addEventListener('scroll',()=>{sb=performance.now()},{capture:true,passive:true});
   function frame(t){
     requestAnimationFrame(frame);
-    const dt=t-last;if(dt<33||dlg.open)return;
+    const dt=t-last;if(dt<33||dlg.open||t-sb<150)return;
     last=t;const k=Math.min(dt,100)/16.7;
     for(const p of P){
       const dx=p.x-m.x,dy=p.y-m.y,d2=dx*dx+dy*dy;
