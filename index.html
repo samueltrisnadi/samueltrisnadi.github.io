@@ -411,7 +411,7 @@ function bad(img){
   addEventListener('scroll',()=>{sb=performance.now()},{capture:true,passive:true});
   function frame(t){
     requestAnimationFrame(frame);
-    const dt=t-last;if(dt<33||dlg.open||t-sb<150)return;
+    const dt=t-last;if(dt<16||dlg.open||t-sb<150)return;
     last=t;const k=Math.min(dt,100)/16.7;
     for(const p of P){
       const dx=p.x-m.x,dy=p.y-m.y,d2=dx*dx+dy*dy;
