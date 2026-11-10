@@ -4,294 +4,588 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Samuel Trisnadi | Mechanical Engineer & Hardware Systems Developer</title>
+<title>Samuel Trisnadi | Mechanical Engineer &amp; Hardware Systems Developer</title>
 <meta name="description" content="Portfolio of Samuel Trisnadi: mechanical engineering, robotics, electric powertrains and rapid prototyping.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="output.css">
 <style>
-:root{--bg:#0a0a0a;--panel:rgba(9,16,34,.92);--blue:#1a56db;--blue-hi:#3b7bff;--navy:#0b1f4d;--green:#1fdc7a;--line:#16254a;--txt:#f5f7fa;--mut:#8b95a7}
-html{scroll-behavior:auto;scroll-padding-top:64px}
-body{background:var(--bg);color:var(--txt);font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;line-height:1.65;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.hd{font-family:'Orbitron','Segoe UI',system-ui,sans-serif;letter-spacing:.02em}
+:root{
+  --bg:#05060b;--bg-2:#070b15;--panel:rgba(9,14,26,.86);--panel-2:rgba(6,10,19,.94);
+  --ink:#e7f2ff;--mut:#7f8ea8;--mut-2:#a7b6cb;
+  --cy:#22e6ff;--cy-2:#7bf5ff;--mg:#ff2d78;--mg-2:#ff7aa8;--ok:#3dffa0;
+  --line:rgba(34,230,255,.16);--line-2:rgba(34,230,255,.38);--line-mg:rgba(255,45,120,.34);
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:'Chakra Petch','Segoe UI',system-ui,sans-serif;
+  --chamfer:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:auto;scroll-padding-top:80px;background:var(--bg)}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:16px;
+  line-height:1.65;font-weight:400;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(to right,rgba(34,230,255,.055) 1px,transparent 1px),
+    linear-gradient(to bottom,rgba(34,230,255,.055) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 25%,#000 0%,transparent 80%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 25%,#000 0%,transparent 80%);
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55;
+  background:repeating-linear-gradient(0deg,rgba(140,220,255,.028) 0 1px,transparent 1px 4px);
+}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--disp);font-weight:700;line-height:1.15;margin:0}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:rgba(34,230,255,.28);color:#fff}
+.cy::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#070b13}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#12586a,#0d3644);border:1px solid rgba(34,230,255,.25)}
+::-webkit-scrollbar-thumb:hover{background:#1a7f96}
+*{scrollbar-width:thin;scrollbar-color:#134a5a #070b13}
+
 #bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .layer{position:relative;z-index:1}
-.wrap{max-width:1120px;margin:0 auto;padding:0 1.25rem}
-section{padding:4.5rem 0}
-.sec{font-size:clamp(1.4rem,3.2vw,2rem);font-weight:800;display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
-.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--blue),transparent)}
-.panel{background:var(--panel);border:1px solid var(--line);position:relative}
-.brk::before,.brk::after{content:"";position:absolute;width:16px;height:16px;border:2px solid var(--green);pointer-events:none}
-.brk::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
-.brk::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-a{color:inherit}
-:focus-visible{outline:2px solid var(--green);outline-offset:3px}
-.nav{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(10,10,10,.94);border-bottom:1px solid var(--line)}
-.nav a{color:var(--mut);text-decoration:none;font-size:.75rem;transition:color .2s}
-.nav a:hover{color:var(--green)}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
-@keyframes pulse{50%{opacity:.35}}
-.btn{display:inline-block;padding:.8rem 1.6rem;font-weight:500;font-size:.9rem;text-decoration:none;border:1px solid var(--blue);transition:.2s}
-.btn-solid{background:var(--blue);color:#fff}
-.btn-solid:hover{background:var(--blue-hi);box-shadow:0 0 22px rgba(59,123,255,.5)}
-.btn-ghost{color:var(--green);border-color:var(--green);background:transparent}
-.btn-ghost:hover{background:rgba(31,220,122,.1);box-shadow:0 0 18px rgba(31,220,122,.3)}
-.photo{width:min(300px,70vw);aspect-ratio:4/5;border:2px solid var(--blue-hi);box-shadow:0 0 28px rgba(59,123,255,.3);background:linear-gradient(160deg,var(--navy),#060b18);overflow:hidden;display:grid;place-items:center}
-.photo img{width:100%;height:100%;object-fit:cover}
-.noimg::after{content:attr(data-l);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:1rem;color:var(--mut);font-size:.75rem}
+.wrap{max-width:1180px;margin:0 auto;padding:0 1.4rem}
+section{padding:5rem 0;border-top:1px solid rgba(34,230,255,.09)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+
+/* ---------- section headers ---------- */
+.sec-hd{display:flex;align-items:flex-end;gap:1rem;margin-bottom:2.25rem;flex-wrap:wrap}
+.sec-idx{font:500 .7rem/1 var(--mono);letter-spacing:.2em;color:var(--mg);margin-right:.75rem;transform:translateY(-.1em);flex:none}
+.sec-tt{display:flex;flex-direction:column;gap:.3rem;min-width:0}
+.sec{font-size:clamp(1.45rem,3.6vw,2.15rem);text-transform:uppercase;letter-spacing:.01em;font-weight:700;display:flex;align-items:baseline;flex-wrap:wrap}
+.sec-sub{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+.sec-rule{flex:1;height:1px;min-width:2rem;margin-bottom:.5rem;position:relative;
+  background:linear-gradient(90deg,var(--line-2),rgba(34,230,255,0))}
+.sec-rule::after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;background:var(--cy);box-shadow:0 0 10px var(--cy)}
+
+/* ---------- panels ---------- */
+.panel{position:relative;background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--line);
+  transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
+.panel::before,.panel::after{content:"";position:absolute;width:16px;height:16px;pointer-events:none;opacity:.85;transition:width .3s ease,height .3s ease,opacity .3s ease}
+.panel::before{top:-1px;left:-1px;border-top:1px solid var(--cy);border-left:1px solid var(--cy)}
+.panel::after{bottom:-1px;right:-1px;border-bottom:1px solid var(--mg);border-right:1px solid var(--mg)}
+.panel:hover::before,.panel:hover::after{width:26px;height:26px;opacity:1}
+.panel:hover{border-color:var(--line-2)}
+
 .mut{color:var(--mut)}
-.chip{display:inline-block;font-size:.72rem;padding:.15rem .6rem;border:1px solid rgba(31,220,122,.4);color:var(--green);margin:.2rem .3rem .2rem 0}
-.yr{display:inline-block;font-size:.72rem;padding:.1rem .6rem;background:var(--navy);color:#9db8ff;border-left:3px solid var(--green)}
-ul.log{list-style:none;padding:0}
-ul.log li{position:relative;padding-left:1.2rem;margin:.35rem 0;color:#c4cad6;font-size:.88rem}
-ul.log li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;background:var(--green)}
-.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:min(340px,82vw);gap:1.25rem;overflow-x:auto;padding:1rem .25rem 1.5rem;cursor:grab;overscroll-behavior-x:contain}
+.mono-label{font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut)}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.5rem;text-decoration:none;cursor:pointer;
+  font:500 .74rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;border:1px solid transparent;
+  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  transition:background .2s ease,box-shadow .25s ease,color .2s ease,border-color .2s ease}
+.btn svg{width:14px;height:14px;transition:transform .2s ease}
+.btn:hover svg{transform:translateX(3px)}
+.btn-primary{background:var(--cy);color:#031016;border-color:var(--cy);font-weight:700;box-shadow:0 0 24px rgba(34,230,255,.32)}
+.btn-primary:hover{background:var(--cy-2);box-shadow:0 0 34px rgba(34,230,255,.55)}
+.btn-ghost{color:var(--cy);border-color:rgba(34,230,255,.4);background:rgba(34,230,255,.04)}
+.btn-ghost:hover{background:rgba(34,230,255,.12);border-color:var(--cy);box-shadow:0 0 22px rgba(34,230,255,.25)}
+
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);animation:pulse 2.2s infinite}
+@keyframes pulse{50%{opacity:.3;box-shadow:0 0 2px var(--ok)}}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:0;left:0;right:0;z-index:30;height:64px;
+  background:rgba(5,7,13,.74);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid rgba(34,230,255,.12)}
+.nav-in{max-width:1180px;margin:0 auto;padding:0 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;height:100%}
+.brand{display:flex;align-items:center;gap:.65rem;text-decoration:none;flex:none}
+.brand-mark{width:28px;height:28px;display:grid;place-items:center;color:#04080e;font:700 .6rem/1 var(--mono);letter-spacing:.04em;
+  background:linear-gradient(135deg,var(--cy),var(--mg));clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)}
+.brand-txt{font:600 .74rem/1 var(--mono);letter-spacing:.26em;color:#dff4ff}
+.nav-links{display:flex;align-items:center;gap:.1rem;overflow-x:auto;scrollbar-width:none;max-width:100%}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{position:relative;padding:.6rem .68rem;text-decoration:none;white-space:nowrap;
+  font:500 .66rem/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mut);transition:color .2s ease}
+.nav-links a::after{content:"";position:absolute;left:.68rem;right:.68rem;bottom:.28rem;height:1px;background:var(--cy);
+  box-shadow:0 0 8px var(--cy);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-links a:hover,.nav-links a[aria-current="true"]{color:var(--cy)}
+.nav-links a:hover::after,.nav-links a[aria-current="true"]::after{transform:scaleX(1)}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--cy),var(--mg));
+  box-shadow:0 0 12px rgba(34,230,255,.7);transition:width .1s linear}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:7rem 0 5rem;border-top:0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center;width:100%}
+.kicker{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;font:500 .66rem/1.5 var(--mono);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--cy);margin-bottom:1.5rem}
+.kicker .ks{color:rgba(34,230,255,.35)}
+.kicker .k-ok{color:var(--mut-2)}
+.hero-title{font-size:clamp(2.7rem,8vw,5.4rem);line-height:.94;letter-spacing:-.01em;text-transform:uppercase;font-weight:700;
+  color:#f2f9ff;text-shadow:0 0 48px rgba(34,230,255,.22);margin-bottom:1.2rem}
+.hero-title .l2{display:inline-block}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .hero-title .l2{background:linear-gradient(96deg,#eafbff 0%,#7bf5ff 28%,#22e6ff 58%,#ff6aa0 92%,#ff2d78 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+}
+.hero-role{font:500 clamp(.95rem,1.9vw,1.15rem)/1.5 var(--disp);color:#cfe0f2;letter-spacing:.03em;max-width:34ch}
+.hero-role .amp{color:var(--mg);font-weight:600}
+.hero-desc{margin-top:1.1rem;color:var(--mut);font-size:.86rem;max-width:46ch;line-height:1.75}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2.1rem}
+.specs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:2.1rem 0 0;max-width:33rem;
+  border:1px solid var(--line);background:rgba(6,10,18,.55)}
+.specs>div{padding:.8rem 1rem;border-left:1px solid var(--line);min-width:0}
+.specs>div:first-child{border-left:0}
+.specs dt{font-size:.56rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut)}
+.specs dd{margin:.35rem 0 0;font-size:.78rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.hero-visual{display:flex;flex-direction:column;align-items:center;gap:1rem;justify-self:end}
+.frame{position:relative;width:min(330px,74vw);aspect-ratio:4/5;padding:1px;
+  background:linear-gradient(150deg,rgba(123,245,255,.9),rgba(34,230,255,.12) 40%,rgba(255,45,120,.6));
+  clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px));
+  box-shadow:0 0 70px rgba(34,230,255,.18)}
+.frame-in{position:relative;width:100%;height:100%;overflow:hidden;background:#060a13;
+  clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px))}
+.frame-in img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.06) brightness(.96);transition:filter .5s ease}
+.frame:hover .frame-in img{filter:saturate(1.08) contrast(1.12) brightness(1)}
+.frame-in::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(5,8,16,.4) 0%,transparent 28%,rgba(5,8,16,.15) 62%,rgba(5,8,16,.7) 100%),
+             repeating-linear-gradient(0deg,rgba(140,230,255,.07) 0 1px,transparent 1px 4px)}
+.frame-in::before{content:"";position:absolute;left:0;right:0;height:20%;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(34,230,255,.16),transparent);animation:sweep 7s linear infinite}
+@keyframes sweep{0%{transform:translateY(-130%)}100%{transform:translateY(540%)}}
+.frame-tag{position:absolute;z-index:3;font:500 .56rem/1 var(--mono);letter-spacing:.18em;color:#c9f2ff;
+  background:rgba(4,8,15,.78);border:1px solid rgba(34,230,255,.3);padding:.3rem .45rem;backdrop-filter:blur(4px)}
+.ft-1{left:.75rem;bottom:.75rem}
+.ft-2{right:.75rem;top:.75rem;border-color:rgba(255,45,120,.4);color:#ffc2d6}
+.frame-cap{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:.5rem}
+.frame-cap::before{content:"";width:18px;height:1px;background:var(--mg)}
+
+.scroll-cue{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);display:flex;flex-direction:column;
+  align-items:center;gap:.5rem;font:500 .56rem/1 var(--mono);letter-spacing:.3em;color:var(--mut);text-decoration:none}
+.scroll-cue:hover{color:var(--cy)}
+.scroll-cue .tick{width:1px;height:34px;background:linear-gradient(180deg,var(--cy),transparent);animation:drop 2.4s ease-in-out infinite}
+@keyframes drop{0%,100%{opacity:.25;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:1.25rem}
+.about-copy{padding:1.75rem}
+.about-copy p{color:#c9d5e4;font-size:.98rem;line-height:1.85}
+.contact-list{padding:1.6rem;display:flex;flex-direction:column;gap:1.05rem;font-style:normal}
+.contact-list .ck{display:block;font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);margin-bottom:.2rem}
+.lnk{color:var(--cy);text-decoration:none;font-size:.82rem;border-bottom:1px solid rgba(34,230,255,.28);
+  padding-bottom:1px;transition:color .2s ease,border-color .2s ease,text-shadow .2s ease;word-break:break-word}
+.lnk:hover{color:#fff;border-color:var(--mg);text-shadow:0 0 14px rgba(255,45,120,.6)}
+.contact-list .plain{font-size:.82rem;color:var(--ink)}
+
+/* ---------- rails + cards ---------- */
+.rail{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:min(340px,82vw);gap:1.25rem;
+  overflow-x:auto;padding:1rem .3rem 1.5rem;cursor:grab;overscroll-behavior-x:contain;scroll-snap-type:none;
+  counter-reset:fe}
 .rail.one{grid-template-rows:auto}
 .rail[data-drag]{cursor:grabbing;user-select:none}
-.rail::-webkit-scrollbar{height:12px}
-.rail::-webkit-scrollbar-track{background:#0d1424;border:1px solid var(--line);border-radius:6px}
-.rail::-webkit-scrollbar-thumb{background:var(--blue);border-radius:6px}
-.rail::-webkit-scrollbar-thumb:hover{background:var(--blue-hi)}
-@supports not selector(::-webkit-scrollbar){.rail{scrollbar-width:auto;scrollbar-color:var(--blue) #0d1424}}
-.card{min-width:0;cursor:pointer}
-.ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,var(--navy),#060b18);border-bottom:1px solid var(--line);overflow:hidden}
-.ph img{width:100%;height:100%;object-fit:cover;display:block}
-.card{transition:transform .25s ease,border-color .25s ease}
-.card[data-h],.card:focus-visible,.xp:hover{transform:translateY(-8px);border-color:var(--blue-hi)}
-.rail .card::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:0 16px 32px rgba(59,123,255,.28);opacity:0;transition:opacity .25s ease}
-.rail .card[data-h]::after,.rail .card:focus-visible::after{opacity:1}
-.xp{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-.xp:hover,.xp:focus-visible{box-shadow:0 16px 32px rgba(59,123,255,.28)}
-dialog{background:transparent;border:0;padding:0;margin:auto;width:min(880px,94vw);max-height:92vh;color:var(--txt)}
-dialog::backdrop{background:rgba(0,0,0,.8);backdrop-filter:blur(3px)}
-.pm-in{background:#0a1226;padding:1.5rem;max-height:92vh;overflow-y:auto}
-.pm-x{position:sticky;top:0;float:right;font-size:1.8rem;line-height:1;color:var(--mut);background:#0a1226;padding:0 .25rem}
-.pm-x:hover{color:var(--green)}
-.vid{display:block;object-fit:cover;width:100%;aspect-ratio:16/9;border:0;margin-top:1.25rem}
-.gal{columns:2 240px;column-gap:.75rem;margin-top:1.25rem}
+.rail::-webkit-scrollbar{height:10px}
+.rail::-webkit-scrollbar-track{background:#070d17;border:1px solid var(--line);border-radius:0}
+.rail::-webkit-scrollbar-thumb{background:linear-gradient(90deg,#12606f,#1b8ea6);border:0;border-radius:0}
+.rail::-webkit-scrollbar-thumb:hover{background:var(--cy)}
+@supports not selector(::-webkit-scrollbar){.rail{scrollbar-width:auto;scrollbar-color:#1b8ea6 #070d17}}
+
+.card{position:relative;min-width:0;cursor:pointer;counter-increment:fe;
+  background:linear-gradient(180deg,rgba(10,16,30,.94),rgba(6,10,19,.96));
+  border:1px solid var(--line);overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
+  transition:transform .28s ease,border-color .28s ease,filter .28s ease}
+.card:hover,.card[data-h],.card:focus-visible{transform:translateY(-7px);border-color:var(--line-2);
+  filter:drop-shadow(0 18px 30px rgba(34,230,255,.16))}
+.ph{position:relative;aspect-ratio:16/10;overflow:hidden;background:linear-gradient(135deg,#0a1626,#060a13)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(.45) contrast(1.05) brightness(.9);transition:filter .5s ease,transform .6s ease}
+.card:hover .ph img,.card[data-h] .ph img,.card:focus-visible .ph img{filter:none;transform:scale(1.045)}
+.ph::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(5,8,16,.28),transparent 45%,rgba(5,8,16,.55)),
+             repeating-linear-gradient(0deg,rgba(140,230,255,.05) 0 1px,transparent 1px 4px)}
+.ph::after{content:counter(fe,decimal-leading-zero);position:absolute;z-index:2;left:.6rem;top:.6rem;
+  font:500 .58rem/1 var(--mono);letter-spacing:.14em;color:var(--cy);background:rgba(4,8,16,.82);
+  border:1px solid rgba(34,230,255,.32);padding:.24rem .4rem}
+.card-b{padding:1rem 1.05rem 1.15rem}
+.card h3{font-size:1.02rem;letter-spacing:.005em;color:#eaf5ff;margin-top:.55rem;transition:color .2s ease}
+.card:hover h3,.card:focus-visible h3{color:var(--cy)}
+.card p{margin-top:.45rem;font-size:.79rem;line-height:1.7;color:var(--mut-2)}
+.chips{margin-top:.85rem;display:flex;flex-wrap:wrap;gap:.3rem}
+.chip{display:inline-block;font:500 .6rem/1.5 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+  padding:.16rem .45rem;border:1px solid rgba(34,230,255,.24);color:#9fe9f6;background:rgba(34,230,255,.05)}
+.yr{display:inline-block;font:500 .6rem/1.5 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  padding:.1rem .45rem;color:#ffb3c9;background:rgba(255,45,120,.09);border:1px solid var(--line-mg)}
+.yr::before{content:"// ";color:rgba(255,45,120,.7)}
+
+.rail-hint{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:.4rem}
+.rail-wrap{position:relative}
+
+/* ---------- experience ---------- */
+.xp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.15rem}
+.xp{padding:1.25rem;display:flex;flex-direction:column;gap:.9rem;cursor:pointer;
+  transition:transform .28s ease,border-color .28s ease,filter .28s ease}
+.xp:hover,.xp:focus-visible{transform:translateY(-6px);border-color:var(--line-2);filter:drop-shadow(0 16px 30px rgba(34,230,255,.14))}
+.logo-strip{height:100px;display:grid;place-items:center;overflow:hidden;position:relative;
+  border:1px solid var(--line);background:linear-gradient(135deg,rgba(34,230,255,.07),rgba(255,45,120,.05))}
+.logo-strip img{max-height:100%;width:100%;height:100%;object-fit:contain;padding:.5rem;filter:grayscale(.25) contrast(1.03)}
+.xp h3{font-size:1.02rem;margin-top:.5rem;color:#eaf5ff;transition:color .2s ease}
+.xp:hover h3{color:var(--cy)}
+.xp p{font-size:.78rem;line-height:1.7;color:var(--mut-2);margin-top:.4rem}
+ul.log{list-style:none;padding:0;margin:.55rem 0 0;display:flex;flex-direction:column;gap:.4rem}
+ul.log li{position:relative;padding-left:1.1rem;color:#c4d0de;font-size:.76rem;line-height:1.6}
+ul.log li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;background:var(--cy);
+  transform:rotate(45deg);box-shadow:0 0 8px rgba(34,230,255,.7)}
+
+/* ---------- education ---------- */
+.edu{list-style:none;margin:0;padding:1.4rem 1.5rem;display:flex;flex-direction:column;gap:0}
+.edu li{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.4rem;
+  padding:.9rem 0;border-bottom:1px solid rgba(34,230,255,.09);font-size:.88rem;transition:padding-left .25s ease}
+.edu li:last-child{border-bottom:0}
+.edu li:hover{padding-left:.45rem}
+.edu b{font-family:var(--disp);font-weight:600;font-size:1rem;color:#eaf5ff}
+.edu .mut{font-size:.78rem}
+.edu .yr{flex:none}
+
+/* ---------- skills ---------- */
+.skills-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.15rem}
+.skill{padding:1.4rem}
+.skill h3{display:flex;align-items:center;gap:.6rem;font-size:.86rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:1rem}
+.skill h3::before{content:"";width:14px;height:1px;background:var(--mg);box-shadow:0 0 8px var(--mg)}
+.skill .chips{margin-top:0}
+
+/* ---------- footer ---------- */
+.footer{position:relative;z-index:1;border-top:1px solid var(--line);padding:4.5rem 0 2rem;
+  background:linear-gradient(180deg,rgba(7,11,21,.4),rgba(4,6,12,.9))}
+.foot-k{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mg);margin-bottom:1rem}
+.foot-h{font-size:clamp(1.9rem,5.4vw,3.2rem);text-transform:uppercase;line-height:1;letter-spacing:-.005em;
+  color:#f2f9ff;text-shadow:0 0 40px rgba(34,230,255,.18)}
+.foot-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.9rem}
+.foot-links a{display:inline-flex;align-items:center;gap:.45rem;text-decoration:none;padding:.55rem .9rem;
+  border:1px solid var(--line);font:500 .66rem/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mut-2);transition:color .2s ease,border-color .2s ease,background .2s ease}
+.foot-links a:hover{color:var(--cy);border-color:var(--line-2);background:rgba(34,230,255,.06)}
+.foot-bot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.8rem;
+  margin-top:3rem;padding-top:1.4rem;border-top:1px solid rgba(34,230,255,.1);
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+.foot-bot a{text-decoration:none;color:var(--cy)}
+.foot-bot a:hover{color:#fff}
+
+/* ---------- modal ---------- */
+dialog{background:transparent;border:0;padding:0;margin:auto;width:min(920px,94vw);max-height:92vh;color:var(--ink)}
+dialog::backdrop{background:rgba(2,4,9,.86);backdrop-filter:blur(6px)}
+.pm-in{position:relative;background:linear-gradient(180deg,#0a1220,#060a13);border:1px solid var(--line-2);
+  max-height:92vh;overflow-y:auto;overflow-x:hidden;box-shadow:0 0 90px rgba(34,230,255,.18)}
+.pm-in::before,.pm-in::after{content:"";position:absolute;width:22px;height:22px;pointer-events:none;z-index:4}
+.pm-in::before{top:-1px;left:-1px;border-top:2px solid var(--cy);border-left:2px solid var(--cy)}
+.pm-in::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--mg);border-right:2px solid var(--mg)}
+.pm-hd{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.75rem 1rem;background:rgba(6,10,19,.94);border-bottom:1px solid var(--line);
+  backdrop-filter:blur(8px)}
+.pm-hd .pm-tag{font:500 .6rem/1 var(--mono);letter-spacing:.24em;text-transform:uppercase;color:var(--cy);
+  display:flex;align-items:center;gap:.5rem}
+.pm-hd .pm-tag::before{content:"";width:6px;height:6px;background:var(--mg);box-shadow:0 0 10px var(--mg)}
+.pm-x{width:32px;height:32px;display:grid;place-items:center;border:1px solid var(--line);color:var(--mut);
+  font-size:1.25rem;line-height:1;transition:color .2s ease,border-color .2s ease,background .2s ease}
+.pm-x:hover{color:#fff;border-color:var(--mg);background:rgba(255,45,120,.12)}
+.pm-body{padding:1.5rem 1.6rem 2rem}
+.pm-t{font-size:clamp(1.35rem,3.6vw,1.9rem);line-height:1.15;margin-top:.75rem;color:#f2f9ff;text-transform:uppercase}
+.pm-d{color:#c9d5e4;margin-top:1rem;font-size:.88rem;line-height:1.8;max-width:70ch}
+.vid{display:block;object-fit:cover;width:100%;aspect-ratio:16/9;border:1px solid var(--line);margin-top:1.1rem;background:#04070e}
+.pm-body .btn-ghost{margin-top:.6rem}
+.gal{columns:2 240px;column-gap:.75rem;margin-top:1.4rem}
 .gal:empty{display:none}
-.gal a{display:block;margin-bottom:.75rem;border:1px solid var(--line)}
-.gal img{width:100%;display:block}
+.gal a{display:block;margin-bottom:.75rem;border:1px solid var(--line);overflow:hidden;transition:border-color .25s ease}
+.gal a:hover{border-color:var(--line-2)}
+.gal img{width:100%;display:block;transition:transform .4s ease}
+.gal a:hover img{transform:scale(1.03)}
 body.lock{overflow:hidden}
-.lnk{color:var(--green);text-decoration:underline;text-underline-offset:3px}
-.lnk:hover{color:#fff}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot{animation:none}.card{transition:none}.card[data-h],.card:hover,.card:focus-visible{transform:none}}
+.noimg{position:relative;background-image:
+  repeating-linear-gradient(45deg,rgba(34,230,255,.055) 0 1px,transparent 1px 9px),
+  linear-gradient(135deg,#0a1626,#060a13)}
+.noimg::after{content:attr(data-l);position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  padding:1rem;color:var(--mut);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- reveal ---------- */
+html.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+html.js .rv.in{opacity:1;transform:none}
+html.js .stagger>.rv:nth-child(2){transition-delay:.07s}
+html.js .stagger>.rv:nth-child(3){transition-delay:.14s}
+html.js .stagger>.rv:nth-child(4){transition-delay:.21s}
+html.js .stagger>.rv:nth-child(5){transition-delay:.28s}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:2.5rem}
+  .hero{padding:6.5rem 0 4.5rem;min-height:auto}
+  .hero-visual{justify-self:start;align-items:flex-start}
+  .hero-visual{flex-direction:row;align-items:center;gap:1rem;flex-wrap:wrap}
+  .frame{width:min(260px,62vw)}
+  .about-grid,.xp-grid,.skills-grid{grid-template-columns:1fr}
+  .scroll-cue{display:none}
+  .nav-links a{padding:.55rem .5rem;font-size:.62rem;letter-spacing:.12em}
+  .nav-links a::after{left:.5rem;right:.5rem}
+  section{padding:3.75rem 0}
+  .specs{max-width:none}
+}
+@media (max-width:600px){
+  .brand-txt{display:none}
+  .hero-title{font-size:clamp(2.3rem,11.5vw,3.4rem)}
+  .specs{grid-template-columns:1fr}
+  .specs>div{border-left:0;border-top:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+  .specs>div:first-child{border-top:0}
+  .specs dd{margin:0}
+  .rail{grid-auto-columns:86vw}
+  .nav-links a{font-size:.57rem;letter-spacing:.05em;padding:.5rem .32rem}
+  .nav-links a::after{left:.32rem;right:.32rem;bottom:.24rem}
+  .pm-body{padding:1.25rem 1.1rem 1.6rem}
+  .about-copy{padding:1.35rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+  html.js .rv{opacity:1;transform:none}
+  .card:hover,.card[data-h],.xp:hover{transform:none}
+}
 </style>
 </head>
 <body>
 <canvas id="bg" aria-hidden="true"></canvas>
 
 <nav class="nav" aria-label="Primary">
-  <div class="wrap flex items-center justify-between h-14">
-    <a href="#top" class="hd font-extrabold text-white flex items-center gap-2"><span class="dot"></span><span class="hidden sm:inline">S. Trisnadi</span></a>
-    <div class="flex gap-3 sm:gap-6">
+  <div class="nav-in">
+    <a href="#top" class="brand" aria-label="Samuel Trisnadi, back to top">
+      <span class="brand-mark" aria-hidden="true">ST</span>
+      <span class="brand-txt">S.TRISNADI</span>
+    </a>
+    <div class="nav-links">
       <a href="#details">About</a><a href="#projects">Projects</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#skills">Skills</a>
     </div>
   </div>
+  <div class="prog" id="prog" aria-hidden="true"></div>
 </nav>
 
 <main class="layer">
-<header id="top" class="min-h-screen flex items-center pt-20 pb-10">
-  <div class="wrap w-full grid md:grid-cols-[1.4fr_1fr] gap-10 items-center">
-    <div>
-      <p class="text-sm mb-4" style="color:var(--green)"><span class="dot mr-2"></span>Systems online. Open to internships and collaborations.</p>
-      <h1 class="font-extrabold leading-[1.02] text-5xl sm:text-6xl lg:text-7xl">Samuel<br>Trisnadi</h1>
-      <p class="mt-5 text-lg sm:text-xl text-gray-300">Mechanical Engineer &amp; Hardware Systems Developer</p>
-      <div class="mt-8 flex flex-wrap gap-4">
-        <a href="#details" class="btn btn-solid">More Info</a>
-        <a href="#projects" class="btn btn-ghost">Projects</a>
+<header id="top" class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span class="dot" aria-hidden="true"></span><span>System online</span><span class="ks">/</span><span class="k-ok">Open to internships &amp; collaborations</span></p>
+      <h1 class="hero-title">Samuel<br><span class="l2">Trisnadi</span></h1>
+      <p class="hero-role">Mechanical Engineer <span class="amp">&amp;</span> Hardware Systems Developer</p>
+      <p class="hero-desc">Mechanical engineering student with strong electrical fundamentals and hands-on programming experience, built through years of robotics, repair and fabrication projects.</p>
+      <dl class="specs">
+        <div><dt>Location</dt><dd>Los Angeles, CA</dd></div>
+        <div><dt>Discipline</dt><dd>Mechanical Eng.</dd></div>
+        <div><dt>Status</dt><dd>Open to work</dd></div>
+      </dl>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#details" class="btn btn-ghost">More info</a>
       </div>
     </div>
-    <div class="flex md:justify-end">
-      <div class="panel brk photo" data-l="Drop your photo here as photos/profile.webp">
-        <img src="photos/profile.webp" alt="Profile Placeholder" onerror="badProfile(this)">
+    <div class="hero-visual">
+      <div class="frame">
+        <div class="frame-in">
+          <img src="photos/profile.webp" alt="Portrait of Samuel Trisnadi" onerror="badProfile(this)">
+          <span class="frame-tag ft-2">IMG_001</span>
+          <span class="frame-tag ft-1">ID // ST-357</span>
+        </div>
       </div>
+      <p class="frame-cap">Fig. 01 &mdash; Operator profile</p>
     </div>
   </div>
+  <a href="#details" class="scroll-cue" aria-label="Scroll to summary"><span>Scroll</span><span class="tick" aria-hidden="true"></span></a>
 </header>
 
 <section id="details">
   <div class="wrap">
-    <h2 class="sec">Summary &amp; contact</h2>
-    <div class="grid md:grid-cols-[1.5fr_1fr] gap-6">
-      <div class="panel brk p-6">
-        <p class="text-gray-300 text-lg">A Mechanical Engineering student but also has strong electrical understanding and experience as well as programming proven through his many projects over the years. Through this involvement in Boy Scouts of America to achieve the Eagle Scout Rank and FIRST Robotics in high school he continues through his College Clubs and work as a Robotics Instructor.</p>
+    <div class="sec-hd rv">
+      <div class="sec-tt"><h2 class="sec"><span class="sec-idx">01</span>Summary &amp; contact</h2><p class="sec-sub">// Identity &amp; contact</p></div>
+      <span class="sec-rule" aria-hidden="true"></span>
+    </div>
+    <div class="about-grid stagger">
+      <div class="panel about-copy rv">
+        <p>A Mechanical Engineering student but also has strong electrical understanding and experience as well as programming proven through his many projects over the years. Through this involvement in Boy Scouts of America to achieve the Eagle Scout Rank and FIRST Robotics in high school he continues through his College Clubs and work as a Robotics Instructor.</p>
       </div>
-      <address class="panel p-6 not-italic text-sm space-y-2 break-words">
-        <p><span class="mut">Phone</span><br><a class="lnk" href="tel:+16262543526">(626) 254-3526</a></p>
-        <a class="lnk" href="https://mail.google.com/mail/?view=cm&fs=1&to=samueltrisnadi@gmail.com" target="_blank" rel="noopener">samueltrisnadi@gmail.com</a>
-        <p><span class="mut">Location</span><br>Los Angeles, CA</p>
-        <p><span class="mut">LinkedIn</span><br><a class="lnk" href="https://linkedin.com/in/samuel-trisnadi" target="_blank" rel="noopener">linkedin.com/in/samuel-trisnadi-6a59532a4/</a></p>
+      <address class="panel contact-list rv">
+        <div><span class="ck">Phone</span><a class="lnk" href="tel:+16262543526">(626) 254-3526</a></div>
+        <div><span class="ck">Email</span><a class="lnk" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=samueltrisnadi@gmail.com" target="_blank" rel="noopener">samueltrisnadi@gmail.com</a></div>
+        <div><span class="ck">Location</span><span class="plain">Los Angeles, CA</span></div>
+        <div><span class="ck">LinkedIn</span><a class="lnk" href="https://linkedin.com/in/samuel-trisnadi" target="_blank" rel="noopener">linkedin.com/in/samuel-trisnadi-6a59532a4/</a></div>
       </address>
     </div>
-
   </div>
 </section>
 
 <section id="projects">
   <div class="wrap">
-    <h2 class="sec">Projects</h2>
-    <p class="mut text-sm mb-4">Scroll or drag sideways to browse, newest first. Click a project for more info.</p>
-  </div>
-  <div class="wrap">
+    <div class="sec-hd rv">
+      <div class="sec-tt"><h2 class="sec"><span class="sec-idx">02</span>Projects</h2><p class="sec-sub">// 23 entries &mdash; newest first</p></div>
+      <span class="sec-rule" aria-hidden="true"></span>
+    </div>
+    <p class="rail-hint">Scroll or drag sideways to browse &mdash; click a project for more info</p>
+    <div class="rail-wrap">
     <div class="rail" id="rail" tabindex="0" aria-label="Project gallery, scrolls horizontally">
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/formula" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/formula/cover.webp" alt="Formula Electric" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2026</span><h3 class="font-extrabold mt-3">Formula Electric</h3>
-        <p class="text-sm text-gray-300 mt-2">DC-DC converter work for a Formula Electric race car's low-voltage systems.</p>
-        <div class="mt-3"><span class="chip">Power electronics</span><span class="chip">Formula Electric</span></div></div></article>
+        <div class="card-b"><span class="yr">2026</span><h3>Formula Electric</h3>
+        <p>DC-DC converter work for a Formula Electric race car's low-voltage systems.</p>
+        <div class="chips"><span class="chip">Power electronics</span><span class="chip">Formula Electric</span></div></div></article>
 
-      <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/laptop-flip" data-yt="" data-long="Bought a high-end laptop on Facebook Marketplace for $200, diagnosed and fixed it by purchasing the correct high-power charger, wiping the corrupted Windows installation, and erasing everything, then reselling for profit."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/laptop-flip/cover.webp" alt="High-End Laptop Repair & Resale" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2026</span><h3 class="font-extrabold mt-3">High-End Laptop Repair &amp; Resale</h3>
-        <p class="text-sm text-gray-300 mt-2">Diagnosed and flipped a high-end Facebook Marketplace laptop using the correct charger and a fresh OS install.</p>
-        <div class="mt-3"><span class="chip">Hardware</span><span class="chip">Repair</span><span class="chip">Resale</span></div></div></article>
+      <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/laptop-flip" data-yt="" data-long="Bought a high-end laptop on Facebook Marketplace for $200, diagnosed and fixed it by purchasing the correct high-power charger, wiping the corrupted Windows installation, and erasing everything, then reselling for profit."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/laptop-flip/cover.webp" alt="High-End Laptop Repair &amp; Resale" draggable="false" onerror="bad(this)"></div>
+        <div class="card-b"><span class="yr">2026</span><h3>High-End Laptop Repair &amp; Resale</h3>
+        <p>Diagnosed and flipped a high-end Facebook Marketplace laptop using the correct charger and a fresh OS install.</p>
+        <div class="chips"><span class="chip">Hardware</span><span class="chip">Repair</span><span class="chip">Resale</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/narwal" data-yt="" data-long="Repaired a Narwal robot vacuum by opening it up and pressing back in the loose magnet for the encoder motor that lifts the mop motor, and configured the Chinese version of the app required for the CN model."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/narwal/cover.webp" alt="Narwal Robot Vacuum Repair" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2026</span><h3 class="font-extrabold mt-3">Narwal Robot Vacuum Repair</h3>
-        <p class="text-sm text-gray-300 mt-2">Fixed mop-lift mechanism by reseating the encoder motor magnet and configured the CN model app.</p>
-        <div class="mt-3"><span class="chip">Robotics</span><span class="chip">Repair</span><span class="chip">Diagnostics</span></div></div></article>
+        <div class="card-b"><span class="yr">2026</span><h3>Narwal Robot Vacuum Repair</h3>
+        <p>Fixed mop-lift mechanism by reseating the encoder motor magnet and configured the CN model app.</p>
+        <div class="chips"><span class="chip">Robotics</span><span class="chip">Repair</span><span class="chip">Diagnostics</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/monitor" data-yt="" data-long="Repaired a Samsung Odyssey G9 monitor by using a multimeter for continuity testing and trace troubleshooting, locating a shorted capacitor on the power supply rail, and desoldering it to restore full functionality."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/monitor/cover.webp" alt="Samsung Odyssey G9 Monitor Repair" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2026</span><h3 class="font-extrabold mt-3">Samsung Odyssey G9 Monitor Repair</h3>
-        <p class="text-sm text-gray-300 mt-2">Traced circuitry with a multimeter to isolate and desolder a shorted capacitor on the power rail.</p>
-        <div class="mt-3"><span class="chip">Electronics</span><span class="chip">Repair</span><span class="chip">Soldering</span></div></div></article>
+        <div class="card-b"><span class="yr">2026</span><h3>Samsung Odyssey G9 Monitor Repair</h3>
+        <p>Traced circuitry with a multimeter to isolate and desolder a shorted capacitor on the power rail.</p>
+        <div class="chips"><span class="chip">Electronics</span><span class="chip">Repair</span><span class="chip">Soldering</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/dbf" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/dbf/cover.webp" alt="Design Build Fly RC plane payload" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2026 - Present</span><h3 class="font-extrabold mt-3">Design Build Fly Competition RC Plane</h3>
-        <p class="text-sm text-gray-300 mt-2">Payload design, electrical systems, and powertrain for a competition RC aircraft.</p>
-        <div class="mt-3"><span class="chip">Payload</span><span class="chip">Electrical</span><span class="chip">Powertrain</span></div></div></article>
+        <div class="card-b"><span class="yr">2026 - Present</span><h3>Design Build Fly Competition RC Plane</h3>
+        <p>Payload design, electrical systems, and powertrain for a competition RC aircraft.</p>
+        <div class="chips"><span class="chip">Payload</span><span class="chip">Electrical</span><span class="chip">Powertrain</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/sim" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/sim/cover.webp" alt="Racing simulator" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2026</span><h3 class="font-extrabold mt-3">Racing Simulator</h3>
-        <p class="text-sm text-gray-300 mt-2">A custom 3D-printed racing wheel that improves on older designs by requiring fewer parts and using a built-in magnetic encoder. Building a sim wheel is far cheaper and outputs much greater torque.</p>
-        <div class="mt-3"><span class="chip">Hardware</span><span class="chip">Fabrication</span><span class="chip">Electronics</span></div></div></article>
+        <div class="card-b"><span class="yr">2026</span><h3>Racing Simulator</h3>
+        <p>A custom 3D-printed racing wheel that improves on older designs by requiring fewer parts and using a built-in magnetic encoder. Building a sim wheel is far cheaper and outputs much greater torque.</p>
+        <div class="chips"><span class="chip">Hardware</span><span class="chip">Fabrication</span><span class="chip">Electronics</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/titanium" data-yt="aOex7jNDIag XGneU7RDIpc tL2GAVqMSlI" data-long="Robotics systems, mechanisms, and hardware integration."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/titanium/cover.webp" alt="TI Robotics" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2020 - 2024</span><h3 class="font-extrabold mt-3">TI Robotics</h3>
-        <p class="text-sm text-gray-300 mt-2">Robotics systems, mechanisms, and hardware integration.</p>
-        <div class="mt-3"><span class="chip">Robotics</span><span class="chip">Hardware</span></div></div></article>
+        <div class="card-b"><span class="yr">2020 - 2024</span><h3>TI Robotics</h3>
+        <p>Robotics systems, mechanisms, and hardware integration.</p>
+        <div class="chips"><span class="chip">Robotics</span><span class="chip">Hardware</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/segway" data-yt="" data-long="An experimental self-balancing transport build that ultimately proved to be a failed project, serving as a valuable learning experience in control loops and mechanical dynamics."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/segway/cover.webp" alt="Segway project" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2023</span><h3 class="font-extrabold mt-3">Segway</h3>
-        <p class="text-sm text-gray-300 mt-2">Self-balancing two-wheeled transport vehicle mechanics and control (failed project).</p>
-        <div class="mt-3"><span class="chip">Robotics</span><span class="chip">Control</span></div></div></article>
+        <div class="card-b"><span class="yr">2023</span><h3>Segway</h3>
+        <p>Self-balancing two-wheeled transport vehicle mechanics and control (failed project).</p>
+        <div class="chips"><span class="chip">Robotics</span><span class="chip">Control</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/euc" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/euc/cover.webp" alt="Electric unicycle" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2025</span><h3 class="font-extrabold mt-3">Electric Unicycle</h3>
-        <p class="text-sm text-gray-300 mt-2">Electric unicycle project covering the powertrain, battery, and diagnostics.</p>
-        <div class="mt-3"><span class="chip">Electric powertrain</span><span class="chip">Diagnostics</span></div></div></article>
+        <div class="card-b"><span class="yr">2025</span><h3>Electric Unicycle</h3>
+        <p>Electric unicycle project covering the powertrain, battery, and diagnostics.</p>
+        <div class="chips"><span class="chip">Electric powertrain</span><span class="chip">Diagnostics</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/projection" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/projection/cover.webp" alt="Projection mapping" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2022</span><h3 class="font-extrabold mt-3">Projection Mapping</h3>
-        <p class="text-sm text-gray-300 mt-2">Projected video mapped onto physical surfaces and objects.</p>
-        <div class="mt-3"><span class="chip">Projection</span><span class="chip">Video</span></div></div></article>
+        <div class="card-b"><span class="yr">2022</span><h3>Projection Mapping</h3>
+        <p>Projected video mapped onto physical surfaces and objects.</p>
+        <div class="chips"><span class="chip">Projection</span><span class="chip">Video</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/3dprint" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/3dprint/cover.webp" alt="Tronxy X5SA 3D printer customization" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2021 - Present</span><h3 class="font-extrabold mt-3">Advanced FDM 3D Printing / Tronxy-X5SA Customization</h3>
-        <p class="text-sm text-gray-300 mt-2">Hardware and firmware upgrades to a Tronxy X5SA, running Marlin and Klipper.</p>
-        <div class="mt-3"><span class="chip">FDM</span><span class="chip">Marlin</span><span class="chip">Klipper</span></div></div></article>
+        <div class="card-b"><span class="yr">2021 - Present</span><h3>Advanced FDM 3D Printing / Tronxy-X5SA Customization</h3>
+        <p>Hardware and firmware upgrades to a Tronxy X5SA, running Marlin and Klipper.</p>
+        <div class="chips"><span class="chip">FDM</span><span class="chip">Marlin</span><span class="chip">Klipper</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/trike" data-yt="7pKLiGMCYlM" data-long="A custom-built electric drift trike with its own powertrain and frame."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/trike/cover.webp" alt="Electric drift trike" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2021</span><h3 class="font-extrabold mt-3">Electric Drift Trike</h3>
-        <p class="text-sm text-gray-300 mt-2">A custom-built electric drift trike with its own powertrain and frame.</p>
-        <div class="mt-3"><span class="chip">Electric vehicle</span><span class="chip">Fabrication</span></div></div></article>
+        <div class="card-b"><span class="yr">2021</span><h3>Electric Drift Trike</h3>
+        <p>A custom-built electric drift trike with its own powertrain and frame.</p>
+        <div class="chips"><span class="chip">Electric vehicle</span><span class="chip">Fabrication</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/ductcleaning" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/ductcleaning/cover.webp" alt="Duct Cleaning project" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2024</span><h3 class="font-extrabold mt-3">Duct Cleaning</h3>
-        <p class="text-sm text-gray-300 mt-2">Custom tools and automated mechanisms for HVAC duct inspection and cleaning.</p>
-        <div class="mt-3"><span class="chip">HVAC</span><span class="chip">Mechanisms</span></div></div></article>
+        <div class="card-b"><span class="yr">2024</span><h3>Duct Cleaning</h3>
+        <p>Custom tools and automated mechanisms for HVAC duct inspection and cleaning.</p>
+        <div class="chips"><span class="chip">HVAC</span><span class="chip">Mechanisms</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/tv" data-yt="" data-long="Diagnosed and repaired a common issue in budget Vizio TVs involving a bad CPU solder joint/connection. Tore down the unit, used a hot air rework station to reheat and reflow the main CPU core to reset the connection, successfully restoring full operation without replacing components."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/tv/cover.webp" alt="Vizio TV repair" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">July 2022</span><h3 class="font-extrabold mt-3">Vizio TV CPU Repair &amp; Reflow</h3>
-        <p class="text-sm text-gray-300 mt-2">Fixed a common issue on budget Vizio TVs by tearing down the unit and using hot air to reflow the CPU core.</p>
-        <div class="mt-3"><span class="chip">Electronics</span><span class="chip">Repair</span><span class="chip">Soldering</span></div></div></article>
+        <div class="card-b"><span class="yr">July 2022</span><h3>Vizio TV CPU Repair &amp; Reflow</h3>
+        <p>Fixed a common issue on budget Vizio TVs by tearing down the unit and using hot air to reflow the CPU core.</p>
+        <div class="chips"><span class="chip">Electronics</span><span class="chip">Repair</span><span class="chip">Soldering</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/laptop" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/laptop/cover.webp" alt="Laptop modifications" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2021</span><h3 class="font-extrabold mt-3">Laptop Modifications</h3>
-        <p class="text-sm text-gray-300 mt-2">Hardware upgrades, thermal management overhaul, and system custom tuning.</p>
-        <div class="mt-3"><span class="chip">Hardware</span><span class="chip">Repair</span></div></div></article>
+        <div class="card-b"><span class="yr">2021</span><h3>Laptop Modifications</h3>
+        <p>Hardware upgrades, thermal management overhaul, and system custom tuning.</p>
+        <div class="chips"><span class="chip">Hardware</span><span class="chip">Repair</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/oven" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/oven/cover.webp" alt="Oven repair" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2020</span><h3 class="font-extrabold mt-3">Oven Repair &amp; Electronics</h3>
-        <p class="text-sm text-gray-300 mt-2">Troubleshooting heating elements, controls, and safety systems.</p>
-        <div class="mt-3"><span class="chip">Appliances</span><span class="chip">Electrical</span></div></div></article>
+        <div class="card-b"><span class="yr">2020</span><h3>Oven Repair &amp; Electronics</h3>
+        <p>Troubleshooting heating elements, controls, and safety systems.</p>
+        <div class="chips"><span class="chip">Appliances</span><span class="chip">Electrical</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/acblower" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/acblower/cover.webp" alt="AC Blower" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2020</span><h3 class="font-extrabold mt-3">AC Blower Motor Maintenance</h3>
-        <p class="text-sm text-gray-300 mt-2">HVAC blower motor servicing, wiring repair, and airflow optimization.</p>
-        <div class="mt-3"><span class="chip">HVAC</span><span class="chip">Mechanisms</span></div></div></article>
+        <div class="card-b"><span class="yr">2020</span><h3>AC Blower Motor Maintenance</h3>
+        <p>HVAC blower motor servicing, wiring repair, and airflow optimization.</p>
+        <div class="chips"><span class="chip">HVAC</span><span class="chip">Mechanisms</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/doorbell" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/doorbell/cover.webp" alt="Doorbell project" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2020</span><h3 class="font-extrabold mt-3">Smart Doorbell Integration</h3>
-        <p class="text-sm text-gray-300 mt-2">Low-voltage wiring, relay control, and camera integration.</p>
-        <div class="mt-3"><span class="chip">Low Voltage</span><span class="chip">IoT</span></div></div></article>
+        <div class="card-b"><span class="yr">2020</span><h3>Smart Doorbell Integration</h3>
+        <p>Low-voltage wiring, relay control, and camera integration.</p>
+        <div class="chips"><span class="chip">Low Voltage</span><span class="chip">IoT</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/waterslide" data-yt="oJce4GrqdFg" data-long="Short version of a custom waterslide build. A longer, complete build video with a guide to building your own is coming soon."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/waterslide/cover.webp" alt="Custom waterslide build" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2020</span><h3 class="font-extrabold mt-3">Custom Waterslide Build</h3>
-        <p class="text-sm text-gray-300 mt-2">Short version of a custom waterslide build. The full build video and a guide to making your own are coming soon.</p>
-        <div class="mt-3"><span class="chip">Design</span><span class="chip">Structures</span></div></div></article>
+        <div class="card-b"><span class="yr">2020</span><h3>Custom Waterslide Build</h3>
+        <p>Short version of a custom waterslide build. The full build video and a guide to making your own are coming soon.</p>
+        <div class="chips"><span class="chip">Design</span><span class="chip">Structures</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/8th%20sci%20proj" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/8th%20sci%20proj/cover.webp" alt="8th Grade Science Project" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2020</span><h3 class="font-extrabold mt-3">8th Grade Science Project</h3>
-        <p class="text-sm text-gray-300 mt-2">Experimental engineering and data collection project.</p>
-        <div class="mt-3"><span class="chip">Science</span><span class="chip">Research</span></div></div></article>
+        <div class="card-b"><span class="yr">2020</span><h3>8th Grade Science Project</h3>
+        <p>Experimental engineering and data collection project.</p>
+        <div class="chips"><span class="chip">Science</span><span class="chip">Research</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/7th%20sci%20proj" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/7th%20sci%20proj/cover.webp" alt="7th Grade Science Project" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2019</span><h3 class="font-extrabold mt-3">7th Grade Science Project</h3>
-        <p class="text-sm text-gray-300 mt-2">Early STEM inquiry and physical prototype testing.</p>
-        <div class="mt-3"><span class="chip">Science</span><span class="chip">Testing</span></div></div></article>
+        <div class="card-b"><span class="yr">2019</span><h3>7th Grade Science Project</h3>
+        <p>Early STEM inquiry and physical prototype testing.</p>
+        <div class="chips"><span class="chip">Science</span><span class="chip">Testing</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/6th%20sci%20proj" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/6th%20sci%20proj/cover.webp" alt="6th Grade Science Project" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2018</span><h3 class="font-extrabold mt-3">6th Grade Science Project</h3>
-        <p class="text-sm text-gray-300 mt-2">Foundational scientific method experiment and presentation.</p>
-        <div class="mt-3"><span class="chip">Science</span><span class="chip">Experiment</span></div></div></article>
+        <div class="card-b"><span class="yr">2018</span><h3>6th Grade Science Project</h3>
+        <p>Foundational scientific method experiment and presentation.</p>
+        <div class="chips"><span class="chip">Science</span><span class="chip">Experiment</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/archive" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/archive/cover.webp" alt="Project archive" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">Archive</span><h3 class="font-extrabold mt-3">Project Archive &amp; Notes</h3>
-        <p class="text-sm text-gray-300 mt-2">Historical design documents, schematics, and repository backups.</p>
-        <div class="mt-3"><span class="chip">Archive</span><span class="chip">Documentation</span></div></div></article>
+        <div class="card-b"><span class="yr">Archive</span><h3>Project Archive &amp; Notes</h3>
+        <p>Historical design documents, schematics, and repository backups.</p>
+        <div class="chips"><span class="chip">Archive</span><span class="chip">Documentation</span></div></div></article>
 
+    </div>
     </div>
   </div>
 </section>
 
 <section id="experience">
   <div class="wrap">
-    <h2 class="sec">Engineering experience &amp; leadership</h2>
-    <p class="mut text-sm mb-4">Click a card for more info.</p>
-    <div class="grid md:grid-cols-3 gap-5">
-      <article class="card xp panel brk p-6 flex flex-col justify-between gap-4" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/robothink" data-yt="" data-long="Teach after-school robotics STEM curriculum to students ages 5–14.">
+    <div class="sec-hd rv">
+      <div class="sec-tt"><h2 class="sec"><span class="sec-idx">03</span>Engineering experience &amp; leadership</h2><p class="sec-sub">// Professional track &mdash; click a card</p></div>
+      <span class="sec-rule" aria-hidden="true"></span>
+    </div>
+    <div class="xp-grid stagger">
+      <article class="card xp panel rv" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/robothink" data-yt="" data-long="Teach after-school robotics STEM curriculum to students ages 5–14.">
         <div>
-          <div class="w-full h-24 bg-black/40 border border-dashed border-gray-600 rounded mb-4 overflow-hidden relative" data-l="Logo pending">
-            <img src="photos/robothink/cover.webp" alt="RoboThink logo" class="w-full h-full object-cover" onerror="bad(this)">
+          <div class="logo-strip" data-l="Logo pending">
+            <img src="photos/robothink/cover.webp" alt="RoboThink logo" onerror="bad(this)">
           </div>
           <span class="yr">Aug 2026 - Present</span>
-          <h3 class="text-lg font-extrabold mt-3">RoboThink STEM Teacher</h3>
-          <p class="text-sm text-gray-300 mt-2">Teach after-school robotics STEM curriculum to students ages 5–14.</p>
+          <h3>RoboThink STEM Teacher</h3>
+          <p>Teach after-school robotics STEM curriculum to students ages 5–14.</p>
         </div>
       </article>
 
-      <article class="card xp panel brk p-6 flex flex-col justify-between gap-4" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/metro" data-yt="" data-long="Participated in the LA Metro Transportation Career Academy (TCAP) internship program over Summer 2024 (Weeks 6 to 8). Collaborated with the group 'City Striders' to learn transit business fundamentals, project management, and urban planning economics, and designed sustainable city street infrastructure that won 1st place in the challenge.">
+      <article class="card xp panel rv" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/metro" data-yt="" data-long="Participated in the LA Metro Transportation Career Academy (TCAP) internship program over Summer 2024 (Weeks 6 to 8). Collaborated with the group 'City Striders' to learn transit business fundamentals, project management, and urban planning economics, and designed sustainable city street infrastructure that won 1st place in the challenge.">
         <div>
-          <div class="w-full h-24 bg-black/40 border border-dashed border-gray-600 rounded mb-4 overflow-hidden relative" data-l="Logo pending">
-            <img src="photos/metro/cover.webp" alt="Metro logo" class="w-full h-full object-cover" onerror="bad(this)">
+          <div class="logo-strip" data-l="Logo pending">
+            <img src="photos/metro/cover.webp" alt="Metro logo" onerror="bad(this)">
           </div>
           <span class="yr">Summer 2024 (Weeks 6 - 8)</span>
-          <h3 class="text-lg font-extrabold mt-3">LA Metro Transportation Career Academy (TCAP)</h3>
-          <p class="text-sm text-gray-300 mt-2">Won 1st place with the group 'City Striders' designing sustainable city street infrastructure and learning transit business operations.</p>
+          <h3>LA Metro Transportation Career Academy (TCAP)</h3>
+          <p>Won 1st place with the group 'City Striders' designing sustainable city street infrastructure and learning transit business operations.</p>
         </div>
       </article>
 
-      <article class="card xp panel brk p-6 flex flex-col justify-between gap-4" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/titanium" data-yt="aOex7jNDIag XGneU7RDIpc tL2GAVqMSlI" data-long="Vice President, Mechanical Captain, and Strategy Captain. Managed design and build teams, authored 100+ pages of technical documentation, and led FDM 3D printing (Marlin/Klipper) and electrical diagnostics.">
+      <article class="card xp panel rv" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/titanium" data-yt="aOex7jNDIag XGneU7RDIpc tL2GAVqMSlI" data-long="Vice President, Mechanical Captain, and Strategy Captain. Managed design and build teams, authored 100+ pages of technical documentation, and led FDM 3D printing (Marlin/Klipper) and electrical diagnostics.">
         <div>
-          <div class="w-full h-24 bg-black/40 border border-dashed border-gray-600 rounded mb-4 overflow-hidden relative" data-l="Logo pending">
-            <img src="photos/titanium/logo.webp" alt="Titanium Robotics logo" class="w-full h-full object-cover" onerror="bad(this)">
+          <div class="logo-strip" data-l="Logo pending">
+            <img src="photos/titanium/logo.webp" alt="Titanium Robotics logo" onerror="bad(this)">
           </div>
           <span class="yr">2020 – 2024</span>
-          <h3 class="text-lg font-extrabold mt-3">Titanium Robotics (FIRST Robotics Competition)</h3>
-          <p class="text-sm mut">Vice President, Mechanical Captain, Strategy Captain</p>
-          <ul class="log mt-2"><li>Managed design and build teams.</li><li>Authored 100+ pages of technical documentation.</li><li>Led FDM 3D printing (Marlin/Klipper) and electrical diagnostics.</li></ul>
+          <h3>Titanium Robotics (FIRST Robotics Competition)</h3>
+          <p class="mut">Vice President, Mechanical Captain, Strategy Captain</p>
+          <ul class="log"><li>Managed design and build teams.</li><li>Authored 100+ pages of technical documentation.</li><li>Led FDM 3D printing (Marlin/Klipper) and electrical diagnostics.</li></ul>
         </div>
       </article>
     </div>
@@ -300,76 +594,109 @@ body.lock{overflow:hidden}
 
 <section id="scouts">
   <div class="wrap">
-    <h2 class="sec">Boy Scouts</h2>
-    <p class="mut text-sm mb-4">Scroll or drag sideways to browse. Click a card for more info.</p>
-  </div>
-  <div class="wrap">
+    <div class="sec-hd rv">
+      <div class="sec-tt"><h2 class="sec"><span class="sec-idx">04</span>Boy Scouts</h2><p class="sec-sub">// Troop 357 &mdash; service record</p></div>
+      <span class="sec-rule" aria-hidden="true"></span>
+    </div>
+    <p class="rail-hint">Scroll or drag sideways to browse &mdash; click a card for more info</p>
+    <div class="rail-wrap">
     <div class="rail one" id="rail-scouts" tabindex="0" aria-label="Scouting gallery, scrolls horizontally">
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/eagle" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/eagle/cover.webp" alt="Eagle Scout award" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">Troop 357</span><h3 class="font-extrabold mt-3">Eagle Scout Award</h3>
-        <p class="text-sm text-gray-300 mt-2">Earned the rank of Eagle Scout, the highest rank in Scouts BSA, with Troop 357.</p>
-        <div class="mt-3"><span class="chip">Eagle Scout</span><span class="chip">Troop 357</span></div></div></article>
+        <div class="card-b"><span class="yr">Troop 357</span><h3>Eagle Scout Award</h3>
+        <p>Earned the rank of Eagle Scout, the highest rank in Scouts BSA, with Troop 357.</p>
+        <div class="chips"><span class="chip">Eagle Scout</span><span class="chip">Troop 357</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/eagle-project" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/eagle-project/cover.webp" alt="Eagle project at Gould Mesa Campground" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">Eagle project</span><h3 class="font-extrabold mt-3">Gould Mesa Campground Restoration</h3>
-        <p class="text-sm text-gray-300 mt-2">Planned and led the restoration of the Gould Mesa Campground for my Eagle Scout rank.</p>
-        <div class="mt-3"><span class="chip">Service</span><span class="chip">Project management</span><span class="chip">Leadership</span></div></div></article>
+        <div class="card-b"><span class="yr">Eagle project</span><h3>Gould Mesa Campground Restoration</h3>
+        <p>Planned and led the restoration of the Gould Mesa Campground for my Eagle Scout rank.</p>
+        <div class="chips"><span class="chip">Service</span><span class="chip">Project management</span><span class="chip">Leadership</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/minnesota" data-yt="4DFGXQSXU78" data-long="Troop 357 trip to Northern Tier in Minnesota. 10 days, June 18 – 28, 2022, in the Boundary Waters Canoe Area Wilderness (BWCAW). The video follows the trip day by day."><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/minnesota/cover.webp" alt="Troop 357 Northern Tier trip in the Boundary Waters" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">Jun 18 – 28, 2022</span><h3 class="font-extrabold mt-3">Northern Tier: Boundary Waters Trip</h3>
-        <p class="text-sm text-gray-300 mt-2">10-day Troop 357 trip to Northern Tier in Minnesota, in the Boundary Waters Canoe Area Wilderness.</p>
-        <div class="mt-3"><span class="chip">Northern Tier</span><span class="chip">BWCAW</span><span class="chip">Troop 357</span></div></div></article>
+        <div class="card-b"><span class="yr">Jun 18 – 28, 2022</span><h3>Northern Tier: Boundary Waters Trip</h3>
+        <p>10-day Troop 357 trip to Northern Tier in Minnesota, in the Boundary Waters Canoe Area Wilderness.</p>
+        <div class="chips"><span class="chip">Northern Tier</span><span class="chip">BWCAW</span><span class="chip">Troop 357</span></div></div></article>
 
       <article class="card panel" tabindex="0" role="button" aria-haspopup="dialog" data-folder="photos/leadership" data-yt="" data-long=""><div class="ph" data-l="Image pending"><img loading="lazy" decoding="async" src="photos/leadership/cover.webp" alt="Troop 357 leadership" draggable="false" onerror="bad(this)"></div>
-        <div class="p-4"><span class="yr">2017 – 2022</span><h3 class="font-extrabold mt-3">Troop 357 Leadership</h3>
-        <p class="text-sm text-gray-300 mt-2">Served as Assistant Senior Patrol Leader, Patrol Leader, and Quartermaster.</p>
-        <div class="mt-3"><span class="chip">Leadership</span><span class="chip">Equipment management</span></div></div></article>
+        <div class="card-b"><span class="yr">2017 – 2022</span><h3>Troop 357 Leadership</h3>
+        <p>Served as Assistant Senior Patrol Leader, Patrol Leader, and Quartermaster.</p>
+        <div class="chips"><span class="chip">Leadership</span><span class="chip">Equipment management</span></div></div></article>
 
+    </div>
     </div>
   </div>
 </section>
 
 <section id="education">
   <div class="wrap">
-    <h2 class="sec">Education</h2>
-    <ol class="panel p-6 space-y-4" style="list-style:none">
-      <li class="flex flex-wrap justify-between gap-1"><span><b>California State Polytechnic University, Pomona</b> <span class="mut">Mechanical Engineering</span></span><span class="yr">2026 - Present</span></li>
-      <li class="flex flex-wrap justify-between gap-1"><b>Cuesta Community College</b><span class="yr">2025 - 2026</span></li>
-      <li class="flex flex-wrap justify-between gap-1"><b>Pasadena City College</b><span class="yr">2024 - 2025</span></li>
-      <li class="flex flex-wrap justify-between gap-1"><b>San Marino High School</b><span class="yr">2020 - 2024</span></li>
+    <div class="sec-hd rv">
+      <div class="sec-tt"><h2 class="sec"><span class="sec-idx">05</span>Education</h2><p class="sec-sub">// Academic track</p></div>
+      <span class="sec-rule" aria-hidden="true"></span>
+    </div>
+    <ol class="panel edu rv">
+      <li><span><b>California State Polytechnic University, Pomona</b> <span class="mut">Mechanical Engineering</span></span><span class="yr">2026 - Present</span></li>
+      <li><span><b>Cuesta Community College</b></span><span class="yr">2025 - 2026</span></li>
+      <li><span><b>Pasadena City College</b></span><span class="yr">2024 - 2025</span></li>
+      <li><span><b>San Marino High School</b></span><span class="yr">2020 - 2024</span></li>
     </ol>
   </div>
 </section>
 
 <section id="skills">
   <div class="wrap">
-    <h2 class="sec">Skills</h2>
-    <div class="grid md:grid-cols-3 gap-5">
-      <div class="panel p-6"><h3 class="font-extrabold mb-3">Technical</h3>
-        <span class="chip">Electrical Soldering</span><span class="chip">Mechanical/Electrical Repair</span><span class="chip">FDM 3D Printing</span><span class="chip">Electric Powertrain Systems</span></div>
-      <div class="panel p-6"><h3 class="font-extrabold mb-3">Software</h3>
-        <span class="chip">SolidWorks</span><span class="chip">Fusion 360</span><span class="chip">TinkerCad</span><span class="chip">DaVinci Resolve</span><span class="chip">Microsoft Windows / Office Suite</span><span class="chip">Google Workspace</span></div>
-      <div class="panel p-6"><h3 class="font-extrabold mb-3">Programming / AI</h3>
-        <span class="chip">Java</span><span class="chip">LM Studio</span><span class="chip">ComfyUI</span><span class="chip">Google Gemini</span><span class="chip">Claude</span><span class="chip">Gemini Notebook</span></div>
+    <div class="sec-hd rv">
+      <div class="sec-tt"><h2 class="sec"><span class="sec-idx">06</span>Skills</h2><p class="sec-sub">// Capability matrix</p></div>
+      <span class="sec-rule" aria-hidden="true"></span>
+    </div>
+    <div class="skills-grid stagger">
+      <div class="panel skill rv"><h3>Technical</h3>
+        <div class="chips"><span class="chip">Electrical Soldering</span><span class="chip">Mechanical/Electrical Repair</span><span class="chip">FDM 3D Printing</span><span class="chip">Electric Powertrain Systems</span></div></div>
+      <div class="panel skill rv"><h3>Software</h3>
+        <div class="chips"><span class="chip">SolidWorks</span><span class="chip">Fusion 360</span><span class="chip">TinkerCad</span><span class="chip">DaVinci Resolve</span><span class="chip">Microsoft Windows / Office Suite</span><span class="chip">Google Workspace</span></div></div>
+      <div class="panel skill rv"><h3>Programming / AI</h3>
+        <div class="chips"><span class="chip">Java</span><span class="chip">LM Studio</span><span class="chip">ComfyUI</span><span class="chip">Google Gemini</span><span class="chip">Claude</span><span class="chip">Gemini Notebook</span></div></div>
     </div>
   </div>
 </section>
 </main>
 
+<footer class="footer">
+  <div class="wrap">
+    <p class="foot-k">// End of file</p>
+    <h2 class="foot-h">Let's build<br>something.</h2>
+    <div class="foot-links">
+      <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=samueltrisnadi@gmail.com" target="_blank" rel="noopener">Email</a>
+      <a href="tel:+16262543526">(626) 254-3526</a>
+      <a href="https://linkedin.com/in/samuel-trisnadi" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#projects">Projects</a>
+    </div>
+    <div class="foot-bot">
+      <span>&copy; 2026 Samuel Trisnadi &mdash; Los Angeles, CA</span>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
+  </div>
+</footer>
+
 <dialog id="pm" aria-labelledby="pm-t">
-  <div class="pm-in panel">
-    <button class="pm-x" id="pm-x" type="button" aria-label="Close project details">&times;</button>
-    <span class="yr" id="pm-y"></span>
-    <h3 class="font-extrabold text-2xl mt-3" id="pm-t"></h3>
-    <div class="mt-2" id="pm-tags"></div>
-    <p class="text-gray-300 mt-4" id="pm-d"></p>
-    <div id="pm-v"></div>
-    <div class="gal" id="pm-g"></div>
+  <div class="pm-in">
+    <div class="pm-hd">
+      <span class="pm-tag">Project file</span>
+      <button class="pm-x" id="pm-x" type="button" aria-label="Close project details">&times;</button>
+    </div>
+    <div class="pm-body">
+      <span class="yr" id="pm-y"></span>
+      <h3 class="pm-t" id="pm-t"></h3>
+      <div class="chips" id="pm-tags"></div>
+      <p class="pm-d" id="pm-d"></p>
+      <div id="pm-v"></div>
+      <div class="gal" id="pm-g"></div>
+    </div>
   </div>
 </dialog>
 
 <script>
+document.documentElement.classList.add('js');
+
 function badProfile(img){
   if(img.src.includes('photos/profile.webp')){
     img.src = 'profile.webp';
@@ -377,6 +704,7 @@ function badProfile(img){
   }
   img.style.display='none';
   img.parentElement.classList.add('noimg');
+  img.parentElement.dataset.l = 'Drop your photo here as photos/profile.webp';
 }
 
 function bad(img){
@@ -433,16 +761,16 @@ function bad(img){
     g.lineWidth=.8;
     for(let n=0;n<B;n++){
       const L=bk[n];if(!L.length)continue;
-      g.strokeStyle=`rgba(59,123,255,${(n+.5)/B*.35})`;g.beginPath();
+      g.strokeStyle=`rgba(34,230,255,${(n+.5)/B*.32})`;g.beginPath();
       for(let q=0;q<L.length;q+=4){g.moveTo(L[q],L[q+1]);g.lineTo(L[q+2],L[q+3])}
       g.stroke();
     }
     g.lineWidth=1;
     for(const a of P){
       const dx=a.x-m.x,dy=a.y-m.y,d2=dx*dx+dy*dy;
-      if(d2<32400){g.strokeStyle=`rgba(31,220,122,${(1-Math.sqrt(d2)/180)*.6})`;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(m.x,m.y);g.stroke()}
+      if(d2<32400){g.strokeStyle=`rgba(255,45,120,${(1-Math.sqrt(d2)/180)*.55})`;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(m.x,m.y);g.stroke()}
     }
-    g.fillStyle='rgba(31,220,122,.75)';g.beginPath();
+    g.fillStyle='rgba(150,242,255,.8)';g.beginPath();
     for(const a of P){g.moveTo(a.x+a.r,a.y);g.arc(a.x,a.y,a.r,0,6.283)}
     g.fill();
   }
@@ -556,7 +884,7 @@ async function openProject(c){
   $('pm-t').textContent=title;
   const ch=c.querySelector('.chip');$('pm-tags').innerHTML=ch?ch.parentElement.innerHTML:'';
   $('pm-d').textContent=c.dataset.long||c.querySelector('p').textContent;
-  
+
   const rawYt = c.dataset.yt || '';
   const ytIds = (rawYt.match(/[\w-]{11}/g) || []);
   const web = /^https?:$/.test(location.protocol);$('pm-v').innerHTML = ytIds.map(id => {
@@ -577,6 +905,41 @@ document.querySelectorAll('.xp').forEach(c=>{c.addEventListener('click',()=>open
 $('pm-x').onclick=()=>pm.close();
 pm.addEventListener('click',e=>{if(e.target===pm)pm.close()});
 pm.addEventListener('close',()=>{$('pm-v').innerHTML='';document.body.classList.remove('lock')});
+
+/* HUD chrome: scroll progress, active nav link, reveal-on-scroll */
+(()=>{
+  const prog=document.getElementById('prog');
+  let tick=0;
+  const upd=()=>{
+    tick=0;
+    const h=document.documentElement.scrollHeight-innerHeight;
+    prog.style.width=(h>0?Math.min(100,Math.max(0,scrollY/h*100)):0)+'%';
+    if(scrollY<120)document.querySelectorAll('.nav-links a[aria-current]').forEach(a=>a.removeAttribute('aria-current'));
+  };
+  addEventListener('scroll',()=>{if(!tick)tick=requestAnimationFrame(upd)},{passive:true});
+  addEventListener('resize',upd);upd();
+
+  const links=[...document.querySelectorAll('.nav-links a')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if('IntersectionObserver' in window){
+    const navObs=new IntersectionObserver(es=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting)return;
+        links.forEach(a=>a.removeAttribute('aria-current'));
+        const a=links.find(a=>a.getAttribute('href')==='#'+e.target.id);
+        if(a)a.setAttribute('aria-current','true');
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    secs.forEach(s=>navObs.observe(s));
+
+    const revObs=new IntersectionObserver(es=>{
+      es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');revObs.unobserve(e.target)}});
+    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    document.querySelectorAll('.rv').forEach(el=>revObs.observe(el));
+  }else{
+    document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
+  }
+})();
 </script>
 </body>
 </html>
